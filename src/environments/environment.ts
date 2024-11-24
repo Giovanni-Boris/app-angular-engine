@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'https://datasource-cloud-run-34414109870.us-central1.run.app'
+  apiUrl: 'https://my-gateway-ft59t4e.uc.gateway.dev',
+  apiKey: 'AIzaSyCNkPSLHv31pJJaYARzO8TAsQa9dsBhOxc'
 };
