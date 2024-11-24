@@ -5,6 +5,10 @@ import { Observable, of } from 'rxjs';
 import { API_ENDPOINTS } from '../config/api-endpoints';
 import { environment } from '../../../environments/environment';
 
+interface ApiResponse {
+  data: Product[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +19,8 @@ export class InventoryService {
     private readonly http: HttpClient
   ) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.api_url);
+  getProducts(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.api_url);
   }
 
   addProduct(product: Product): Observable<Product> {
