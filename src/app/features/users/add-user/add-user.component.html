@@ -76,7 +76,7 @@
               <div class="text-error text-sm"> Este campo es requerido </div>
             }
             @if (addUserForm.controls['password'].invalid && addUserForm.controls['password'].errors?.['minlength']) {
-              <div class="text-error text-sm"> La contraseña debe tener al menos 6 caracteres </div>
+              <div class="text-error text-sm"> La contraseña debe tener al menos 8 caracteres </div>
             }
           </div>
 
@@ -89,13 +89,13 @@
             @if (addUserForm.valid) {
             <button type="submit"
               class="text-buttonText bg-button hover:bg-buttonHover focus:ring-2 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-              Añadir producto
+              Añadir usuario
             </button>
             }
             @else {
             <button type="submit" disabled
               class="text-buttonText bg-buttonHover focus:ring-2 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-              Añadir producto
+              Añadir usuario
             </button>
             }
           </div>

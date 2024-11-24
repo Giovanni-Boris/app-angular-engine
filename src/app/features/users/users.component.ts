@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddUserComponent } from "./add-user/add-user.component";
+import { FeedbackService } from '../../core/services/feedback.service';
 
 @Component({
   selector: 'app-users',
@@ -32,7 +33,8 @@ export class UsersComponent {
   data: User[] = [];
   element: User | null = null;
   constructor(
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly feedbackService: FeedbackService
   ) { }
 
   ngOnInit() {
@@ -40,8 +42,14 @@ export class UsersComponent {
   }
 
   loadData() {
-    this.usersService.getAllUsers().subscribe(data => {
-      this.data = data;
+    this.usersService.getAllUsers().subscribe({
+      next: (response) => {
+        this.data = response.data;
+      },
+      error: (error) => {
+        this.feedbackService.showError('Error al cargar productos');
+        console.error('Error al cargar productos:', error);
+      }
     });
   }
 
@@ -56,5 +64,6 @@ export class UsersComponent {
 
   closeModalDelete() {
     this.showDeleteModal = false;
+    this.loadData();
   }
 }

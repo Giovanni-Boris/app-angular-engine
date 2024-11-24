@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AddProductComponent } from "./add-product/add-product.component";
 import { InventoryService } from '../../core/services/inventory.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FeedbackService } from '../../core/services/feedback.service';
 
 @Component({
   selector: 'app-inventory',
@@ -34,7 +35,8 @@ export class InventoryComponent {
   element: Product | null = null;
   constructor(
     private readonly router: Router,
-    private readonly inventoryService: InventoryService
+    private readonly inventoryService: InventoryService,
+    private readonly feedbackService: FeedbackService
   ) { }
 
   ngOnInit() {
@@ -42,10 +44,17 @@ export class InventoryComponent {
   }
 
   loadData() {
-    this.inventoryService.getProducts().subscribe(data => {
-      this.data = data;
+    this.inventoryService.getProducts().subscribe({
+      next: (response) => {
+        this.data = response.data;
+      },
+      error: (error) => {
+        this.feedbackService.showError('Error al cargar productos');
+        console.error('Error al cargar productos:', error);
+      }
     });
   }
+
 
   get filteredData(): Product[] | null {
     return filterData(this.data, this.searchTerm);
@@ -70,5 +79,6 @@ export class InventoryComponent {
 
   closeModalDelete() {
     this.showDeleteModal = false;
+    this.loadData();
   }
 }

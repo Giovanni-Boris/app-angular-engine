@@ -34,7 +34,7 @@ export class AddUserComponent {
     this.addUserForm = this.addUserFormBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
@@ -55,8 +55,8 @@ export class AddUserComponent {
         },
         error: (error) => {
           if (error.status === 400) {
-            this.feedbackService.showError("El usuario ya existe")
             this.closeModal()
+            this.feedbackService.showError("El usuario ya existe")
           }
           this.status = 'error'
           this.closeModal()

@@ -35,7 +35,7 @@
 
     <tbody class="text-secondary">
       <tr *ngFor="let item of filteredData">
-        <td class="px-6 py-4">{{ item.codigo }}</td>
+        <td class="px-6 py-4">{{ item }}</td>
         <td class="px-6 py-4">{{ item.nombre }}</td>
         <td class="px-6 py-4">{{ item.descripcion }}</td>
         @if (item.cantidad <= 0) { <td class="px-6 py-4 text-red-600"> Agotado </td>
