@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InventoryRoutes } from '../../core/config/routes.constants';
+import { UserService } from '../../core/auth/services/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 interface MenuItem {
   label: string;
@@ -16,19 +18,25 @@ interface MenuItem {
   selector: 'app-menu',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+  styleUrl: './menu.component.css',
+  providers: [UserService]
 })
 export class MenuComponent {
   isOpen = false;
-  usuario = 'Admin';
+  user = '';
 
   constructor(
-    // private readonly userService: UserService,
+    private readonly userService: UserService,
     private readonly router: Router
   ) { }
+
+  ngOnInit() {
+    this.loadUser();
+  }
 
   menuItems: MenuItem[] = [
     {
@@ -54,12 +62,16 @@ export class MenuComponent {
     }
   ];
 
+  loadUser() {
+    this.user = localStorage.getItem('username') ?? '';
+  }
+
   toggleDrawer() {
     this.isOpen = !this.isOpen;
   }
 
   logout() {
-    // this.userService.logout();
+    this.userService.logout();
   }
 
   clickItem(item: MenuItem) {
