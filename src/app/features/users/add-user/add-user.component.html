@@ -1,0 +1,106 @@
+<div [class.hidden]="!showModal"
+  class="flex overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full inset-0">
+  @if(showModal){
+  <div class="fixed inset-0 bg-black opacity-20 z-30" (click)="closeModal()"></div>
+  }
+  <div class="relative p-4 w-full max-w-lg max-h-full z-40">
+    <div class="relative bg-white rounded-lg shadow text-primary">
+      <div class="flex items-center justify-center p-4 border-b rounded-t font-bold">
+        <h3> {{title}} </h3>
+      </div>
+      <button type="button" (click)="closeModal()"
+        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+      </button>
+      <div class="p-4 md:pt-12 md:px-4 text-left">
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" class="space-y-6 mb-4 text-primary">
+
+          <!-- username -->
+          <div class="mb-6">
+            <label for="username" class="block text-sm font-medium mb-1">Username *</label>
+            <input type="text" id="username" formControlName="username" required
+              class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
+              placeholder="Ingresa el username" />
+            @if (addUserForm.controls['username'].invalid && addUserForm.controls['username'].touched){
+            <div class="text-error text-sm">Este campo es requerido</div>
+            }
+          </div>
+
+          <!-- email -->
+          <div class="mb-6">
+            <label for="email" class="block text-sm font-medium mb-1">Email *</label>
+            <input type="email" id="email" formControlName="email" required
+              class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
+              placeholder="Ingresa el email" />
+            @if (addUserForm.controls['email'].invalid && addUserForm.controls['email'].touched && !addUserForm.controls['email'].errors?.['email']) {
+              <div class="text-error text-sm">Este campo es requerido</div>
+            }
+            @if (addUserForm.controls['email'].invalid && addUserForm.controls['email'].errors?.['email']) {
+              <div class="text-error text-sm">El email debe ser valido</div>
+            }
+          </div>
+
+          <!-- password -->
+          <div class="mb-6">
+            <label for="password" class="block text-sm font-medium mb-1">Password *</label>
+
+            <div class="relative">
+              <!-- Input password -->
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                required
+                class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
+                placeholder="Ingresa el password"
+              />
+
+              <!-- Toggle password -->
+              <button
+                type="button"
+                (click)="togglePasswordVisibility()"
+                class="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+              >
+              @if (showPassword) {
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M3.05 9.31a1 1 0 1 1 1.914-.577c2.086 6.986 11.982 6.987 14.07.004a1 1 0 1 1 1.918.57a9.5 9.5 0 0 1-1.813 3.417L20.414 14A1 1 0 0 1 19 15.414l-1.311-1.311a9.1 9.1 0 0 1-2.32 1.269l.357 1.335a1 1 0 1 1-1.931.518l-.364-1.357c-.947.14-1.915.14-2.862 0l-.364 1.357a1 1 0 1 1-1.931-.518l.357-1.335a9.1 9.1 0 0 1-2.32-1.27l-1.31 1.312A1 1 0 0 1 3.585 14l1.275-1.275c-.784-.936-1.41-2.074-1.812-3.414Z"/></g></svg>
+              }
+              @else {
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0"/></svg>
+              }
+              </button>
+            </div>
+            @if (addUserForm.controls['password'].invalid && addUserForm.controls['password'].touched && !addUserForm.controls['password'].errors?.['minlength']) {
+              <div class="text-error text-sm"> Este campo es requerido </div>
+            }
+            @if (addUserForm.controls['password'].invalid && addUserForm.controls['password'].errors?.['minlength']) {
+              <div class="text-error text-sm"> La contraseña debe tener al menos 6 caracteres </div>
+            }
+          </div>
+
+          <!-- Modal -->
+          <div class="flex items-center justify-between">
+            <button type="button" (click)="closeModal()"
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-primary-light focus:outline-none bg-white rounded-lg border border-primary-light hover:bg-gray-100 hover:text-primary-light focus:z-10 focus:ring-4 focus:ring-gray-100">
+              Cancelar
+            </button>
+            @if (addUserForm.valid) {
+            <button type="submit"
+              class="text-buttonText bg-button hover:bg-buttonHover focus:ring-2 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+              Añadir producto
+            </button>
+            }
+            @else {
+            <button type="submit" disabled
+              class="text-buttonText bg-buttonHover focus:ring-2 focus:outline-none focus:ring-secondary font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+              Añadir producto
+            </button>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

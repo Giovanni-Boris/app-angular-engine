@@ -1,0 +1,49 @@
+<div class="flex justify-between items-center space-y-4 md:space-y-0 py-4 border-b mb-4">
+  <h1 class="text-2xl font-medium text-textPrimary">Usuarios</h1>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 px-2 md:space-y-0 pb-4">
+    <label for="table-search" class="sr-only">Buscar</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+        </svg>
+      </div>
+      <input type="text" id="table-search-users" [(ngModel)]="searchTerm"
+        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Buscar Usuario">
+    </div>
+    <button type="button" (click)="openAddUser()"
+      class="inline-flex items-center px-4 py-2 text-sm font-medium text-buttonText bg-button rounded-lg hover:bg-buttonHover focus:outline-none focus:ring-primary">
+      Añadir usuario
+    </button>
+    @if (showAddModal) {
+      <app-add-user [showModal] = "showAddModal" (closeModalEvent)="openAddUser()" [title]="title"></app-add-user>
+    }
+  </div>
+  <table class="w-full text-sm text-left rtl:text-right text-secondary">
+    <thead class="text-xs text-primary uppercase bg-gray-100">
+      <tr>
+        <th *ngFor="let header of headers" scope="col" class="px-6 py-3">
+          {{header}}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="text-secondary">
+      <tr *ngFor="let item of filteredData">
+        <td class="px-6 py-4">{{ item.username }}</td>
+        <td class="px-6 py-4">{{ item.email }}</td>
+      </tr>
+    </tbody>
+    @if (filteredData == null) {
+    <tr>
+      <td colspan = "8" class="px-6 py-4 text-center">No se encontraron resultados</td>
+    </tr>
+    }
+  </table>
+</div>
+
