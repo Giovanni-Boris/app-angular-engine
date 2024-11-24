@@ -1,0 +1,74 @@
+<div class="flex justify-between items-center space-y-4 md:space-y-0 py-4 border-b mb-4">
+  <h1 class="text-2xl font-medium text-textPrimary">Productos</h1>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 px-2 md:space-y-0 pb-4">
+    <label for="table-search" class="sr-only">Buscar</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+        </svg>
+      </div>
+      <input type="text" id="table-search-users" [(ngModel)]="searchTerm"
+        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Buscar Producto">
+    </div>
+    <button type="button" (click)="openAddProduct()"
+      class="inline-flex items-center px-4 py-2 text-sm font-medium text-buttonText bg-button rounded-lg hover:bg-buttonHover focus:outline-none focus:ring-primary">
+      Añadir producto
+    </button>
+    @if (showAddModal) {
+    <app-add-product [showModal]="showAddModal" (closeModalEvent)="openAddProduct()" [title]="title"></app-add-product>
+    }
+  </div>
+  <table class="w-full text-sm text-left rtl:text-right text-secondary">
+    <thead class="text-xs text-primary uppercase bg-gray-100">
+      <tr>
+        <th *ngFor="let header of headers" scope="col" class="px-6 py-3">
+          {{header}}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="text-secondary">
+      <tr *ngFor="let item of filteredData">
+        <td class="px-6 py-4">{{ item.codigo }}</td>
+        <td class="px-6 py-4">{{ item.nombre }}</td>
+        <td class="px-6 py-4">{{ item.descripcion }}</td>
+        @if (item.cantidad <= 0) { <td class="px-6 py-4 text-red-600"> Agotado </td>
+          }
+          @if (item.cantidad > 0 && item.cantidad <= 5) { <td class="px-6 py-4 text-yellow-600"> {{ item.cantidad }}
+            </td>
+            }
+            @if (item.cantidad > 5) {
+            <td class="px-6 py-4 text-green-600"> {{ item.cantidad }} </td>
+            }
+            <td class="px-6 py-4">{{ item.precioUnitario }}</td>
+            <td class="px-6 py-4">{{ item.categoria }}</td>
+            <td class="px-6 py-4">
+              <button class="text-primary hover:underline mr-2" (click)="openViewProduct(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                  <g fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                      d="M20.188 10.934c.388.472.582.707.582 1.066s-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18s-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066s.194-.594.582-1.066C5.232 9.21 8.364 6 12 6s6.768 3.21 8.188 4.934Z" />
+                  </g>
+                </svg>
+              </button>
+              @if (showEditModal) {
+              <app-add-product [showModal]="showEditModal" (closeModalEvent)="openViewProduct(item)" [title]="title"
+                [product]="element" [isEditing]="isEditing"></app-add-product>
+              }
+            </td>
+      </tr>
+    </tbody>
+    @if (filteredData == null) {
+    <tr>
+      <td colspan="8" class="px-6 py-4 text-center">No se encontraron resultados</td>
+    </tr>
+    }
+  </table>
+</div>
