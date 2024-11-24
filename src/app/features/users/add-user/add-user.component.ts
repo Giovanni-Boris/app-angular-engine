@@ -20,7 +20,7 @@ export class AddUserComponent {
   @Input() title = ''
   @Input() user: User | null = null
   @Output() closeModalEvent = new EventEmitter()
-  @Output() confirmDeleteEvent = new EventEmitter()
+  @Output() userAddedEvent = new EventEmitter()
 
   addUserForm: FormGroup
 
@@ -50,6 +50,7 @@ export class AddUserComponent {
       this.usersService.addUser(this.addUserForm.value).subscribe({
         next: () => {
           this.status = 'success'
+          this.userAddedEvent.emit()
           this.feedbackService.showSuccess("Usuario agregado exitosamente")
           this.closeModal()
         },

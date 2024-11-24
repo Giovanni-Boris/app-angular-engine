@@ -21,7 +21,7 @@
       Añadir producto
     </button>
     @if (showAddModal) {
-    <app-add-product [showModal]="showAddModal" (closeModalEvent)="openAddProduct()" [title]="title"></app-add-product>
+    <app-add-product [showModal]="showAddModal" (closeModalEvent)="openAddProduct()" [title]="title" (productAddedEvent)="loadData()"></app-add-product>
     }
   </div>
   <table class="w-full text-sm text-left rtl:text-right text-secondary">

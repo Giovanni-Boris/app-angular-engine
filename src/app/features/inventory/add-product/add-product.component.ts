@@ -21,6 +21,7 @@ export class AddProductComponent {
   @Input() title = ''
   @Input() product: Product | null = null
   @Output() closeModalEvent = new EventEmitter()
+  @Output() productAddedEvent = new EventEmitter()
 
   addProductForm: FormGroup
 
@@ -70,6 +71,7 @@ export class AddProductComponent {
           next: () => {
             this.status = 'success'
             this.closeModal()
+            this.productAddedEvent.emit()
             this.feedbackService.showSuccess("Producto agregado exitosamente")
           },
           error: (error) => {

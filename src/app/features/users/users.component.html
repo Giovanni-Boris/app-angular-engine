@@ -21,7 +21,7 @@
       Añadir usuario
     </button>
     @if (showAddModal) {
-      <app-add-user [showModal] = "showAddModal" (closeModalEvent)="openAddUser()" [title]="title"></app-add-user>
+      <app-add-user [showModal] = "showAddModal" (closeModalEvent)="openAddUser()" [title]="title" (userAddedEvent)="loadData()"></app-add-user>
     }
   </div>
   <table class="w-full text-sm text-left rtl:text-right text-secondary">
