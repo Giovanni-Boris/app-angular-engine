@@ -1,0 +1,105 @@
+<nav class="fixed top-0 z-20 w-full bg-background border-b border-headline">
+  <div class="px-3 py-3 md:px-5 md:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <!-- Menu button -->
+        <div
+          class="text-center text-primary hover:bg-gray focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+          (click)="toggleDrawer()">
+          <svg data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+            xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48"
+              d="M88 152h336M88 256h336M88 360h336" />
+          </svg>
+        </div>
+
+        <!-- Logo -->
+        <a href="./" class="w-28 md:w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg text-primary">
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Gestor de Inventario</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- drawer component -->
+<div
+  [ngClass]="{'fixed top-0 left-0 z-40 w-64 h-screen overflow-y-auto transition-transform duration-500 bg-background shadow-lg': true, '-translate-x-full': !isOpen, 'translate-x-0': isOpen}"
+  tabindex="-1" aria-labelledby="drawer-navigation-label"
+  class="flex flex-col h-full">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between bg-primary text-buttonText">
+    <h5 id="drawer-navigation-label" class="text-md md:text-lg font-semibold text-buttonText p-5">Hola {{usuario}} !</h5>
+    <button (click)="toggleDrawer()" class="p-2" aria-controls="drawer-navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z" />
+      </svg>
+      <span class="sr-only">Close menu</span>
+    </button>
+  </div>
+
+  <!-- Menu items -->
+  <div class="py-4 overflow-y-auto border-b border-gray-200 mx-2 flex-grow">
+    <ul class="space-y-2 font-medium">
+      <li *ngFor="let item of menuItems" class="cursor-pointer">
+        <div>
+          <a (click)="clickItem(item)"
+            class="flex items-center p-2 text-textSecondary rounded-lg hover:bg-buttonHover group hover:text-buttonText">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+              viewBox="0 0 22 22">
+              <path [attr.d]="item.icon"></path>
+            </svg>
+            <span class="ms-3">{{ item.label }}</span>
+            <button *ngIf="item.children" (click)="item.isOpen = !item.isOpen" class="ml-auto">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path [attr.d]="item.isOpen ? 'M7 10l5 5 5-5H7z' : 'M7 14l5-5 5 5H7z'"></path>
+              </svg>
+            </button>
+          </a>
+          <ul *ngIf="item.isOpen" class="ml-4 space-y-2">
+            <li *ngFor="let subItem of item.children">
+              <button (click)="clickItem(subItem)"
+                class="flex items-center p-2 text-textSecondary rounded-lg hover:bg-buttonHover group hover:text-primary">
+                <svg class="w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor" viewBox="0 0 22 21">
+                  <path [attr.d]="subItem.icon"></path>
+                </svg>
+                <span class="ms-3">{{ subItem.label }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sing out -->
+  <div class="py-4 mx-2 mt-auto">
+    <ul>
+      <li *ngFor="let item of salir" class="cursor-pointer">
+        <div>
+          <a (click)="clickItem(item)"
+            class="flex items-center p-2 text-textSecondary font-medium rounded-lg hover:bg-buttonHover group hover:text-buttonText">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+              viewBox="0 0 22 21">
+              <path [attr.d]="item.icon"></path>
+            </svg>
+            <span class="ms-3">{{ item.label }}</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Version -->
+  <div class="flex flex-col py-4 mx-2">
+    <p class="text-gray-200 text-center text-[0.75rem]">Versión 1.0</p>
+  </div>
+</div>
+
+
+<!-- Fondo semi-transparente (opcional) -->
+<div *ngIf="isOpen" class="fixed inset-0 bg-black opacity-40 z-30" (click)="toggleDrawer()"></div>
