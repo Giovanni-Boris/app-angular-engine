@@ -34,7 +34,7 @@ export class LoginComponent {
   ) {
     this.authForm = new FormBuilder().group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
   signIn() {
@@ -42,17 +42,18 @@ export class LoginComponent {
       this.status = 'loading';
       this.userService.signIn(this.authForm.value as
         { username: string, password: string }).subscribe({
-          next: () => {
+          next: ( res ) => {
             this.status = 'success';
             this.router.navigate(['/inventario'])
-            this.feedbackService.showSuccess('Inicio de sesión exitoso')
           },
           error: (err) => {
-            if (err.status === 401) {
-              this.feedbackService.showError('Credenciales incorrectas')
+            if (err.status === 404) {
+              this.status = 'error';
+              this.feedbackService.showError('El usuario no existe')
             }
-            if (err.status === 500) {
-              this.feedbackService.showError('Error al iniciar sesión')
+            if (err.status === 401) {
+              this.status = 'error';
+              this.feedbackService.showError('La contraseña es incorrecta')
             }
             this.status = 'error';
             this.feedbackService.showError('Error al iniciar sesión')

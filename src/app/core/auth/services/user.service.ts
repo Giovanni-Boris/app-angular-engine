@@ -28,22 +28,26 @@ export class UserService {
   signIn(credentials: {
     username: string,
     password: string,
-  }): Observable<{ user: User }> {
+  }): Observable<any> {
     return this.http
-      .post<{ user: User }>(this.api_url, {
-        credentials
+      .post<User>(this.api_url, {
+        username: credentials.username,
+        password: credentials.password
       }).pipe(
-        tap(({ user }) => this.setAuth(user))
+        tap(( user ) =>{
+          this.setAuth(user);
+        })
       )
   }
 
   setAuth(user: User): void {
-    this.jtwtService.saveToken(user.token);
+    this.jtwtService.saveToken(user.password);
+    localStorage.setItem('username', user.username);
     this.currentUserSubject.next(user);
   }
-
   logout(): void {
     this.jtwtService.destroyToken();
+    localStorage.removeItem('username');
     this.currentUserSubject.next(null);
     this.router.navigate(['/']);
   }
