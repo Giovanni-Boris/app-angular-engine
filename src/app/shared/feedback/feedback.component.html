@@ -1,0 +1,15 @@
+<div *ngIf="feedback" class="fixed top-4 right-4 max-w-sm z-50">
+  <div
+    [class]="
+      'p-4 rounded-md shadow-md text-white flex justify-between items-center ' +
+      (feedback.type === 'success' ? 'bg-success' : 'bg-error')
+    "
+  >
+    <span>{{ feedback.message }}</span>
+    <button
+      class="ml-4 text-white bg-transparent hover:text-gray-200"
+      (click)="clearFeedback()"
+    >
+      ✕
+    </button>
+  </div>
