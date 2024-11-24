@@ -75,11 +75,12 @@ export class AddProductComponent {
           error: (error) => {
             if (error.status === 400) {
               this.closeModal()
-              this.feedbackService.showError("El producto ya existe")
+              this.feedbackService.showError("Existe un producto con el mismo código")
+            } else {
+              this.closeModal()
+              this.status = 'error'
+              this.feedbackService.showError("Error al agregar el producto")
             }
-            this.closeModal()
-            this.status = 'error'
-            this.feedbackService.showError("Error al agregar el producto")
           }
         })
       }

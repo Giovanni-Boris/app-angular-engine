@@ -50,13 +50,13 @@ export class LoginComponent {
             if (err.status === 404) {
               this.status = 'error';
               this.feedbackService.showError('El usuario no existe')
-            }
-            if (err.status === 401) {
+            } else if (err.status === 401) {
               this.status = 'error';
               this.feedbackService.showError('La contraseña es incorrecta')
+            } else {
+              this.status = 'error';
+              this.feedbackService.showError('Error al iniciar sesión')
             }
-            this.status = 'error';
-            this.feedbackService.showError('Error al iniciar sesión')
             console.log(err)
           }
         })

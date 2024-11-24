@@ -57,10 +57,11 @@ export class AddUserComponent {
           if (error.status === 400) {
             this.closeModal()
             this.feedbackService.showError("El usuario ya existe")
+          } else {
+            this.status = 'error'
+            this.closeModal()
+            this.feedbackService.showError("Error al agregar el usuario")
           }
-          this.status = 'error'
-          this.closeModal()
-          this.feedbackService.showError("Error al agregar el producto")
         }
       })
     }

@@ -47,8 +47,7 @@ export class UsersComponent {
         this.data = response.data;
       },
       error: (error) => {
-        this.feedbackService.showError('Error al cargar productos');
-        console.error('Error al cargar productos:', error);
+        this.feedbackService.showError('Error al cargar usuarios');
       }
     });
   }
@@ -64,6 +63,5 @@ export class UsersComponent {
 
   closeModalDelete() {
     this.showDeleteModal = false;
-    this.loadData();
   }
 }
