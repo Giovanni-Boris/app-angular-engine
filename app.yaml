@@ -1,0 +1,18 @@
+runtime: nodejs18
+instance_class: F2dd
+
+handlers:
+  - url: /
+    static_files: dist/inventory-management/browser/index.html
+    upload: ist/inventory-management/browser/index.html
+  - url: /
+    static_dir: dist/inventory-management/browser
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
