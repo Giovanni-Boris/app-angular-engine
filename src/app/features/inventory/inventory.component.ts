@@ -34,6 +34,7 @@ export class InventoryComponent {
   data: Product[] = [];
   element: Product | null = null;
   status: string = 'init';
+
   constructor(
     private readonly router: Router,
     private readonly inventoryService: InventoryService,
@@ -45,8 +46,8 @@ export class InventoryComponent {
   }
 
   loadData() {
+    this.status = 'loading',
     this.inventoryService.getProducts().subscribe({
-      this.status = 'loading',
       next: (response) => {
         this.status = 'success';
         this.data = response.data;
