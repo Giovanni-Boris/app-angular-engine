@@ -6,7 +6,7 @@ steps:
     args: ['run', 'build', '--prod']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app','deploy','--version=prod']
+    args: ['app','deploy']
 
 options:
   logging: CLOUD_LOGGING_ONLY
