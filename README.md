@@ -13,6 +13,7 @@ La documentación del proyecto incluye detalles técnicos y funcionales esencial
 - **Manual de usuario**  
 
 [Acceso a la documentación completa](https://drive.google.com/drive/folders/1wTFTaACnoVEhMGbIhl3vz2R7mtm_FwcP?usp=sharing)
+[Video sobre la implementación](https://drive.google.com/file/d/1sM27mNokl3YWdIML_wAea-lLqF3z3hH5/view?usp=sharing)
 
 ## Enlaces a los Repositorios
 
