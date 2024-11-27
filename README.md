@@ -1,27 +1,35 @@
-# InventoryManagement
+# Gestión de inventario
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+Este sistema ha sido diseñado para facilitar la gestión de inventario de manera eficiente y accesible. La aplicación permite registrar y visualizar productos, también registrar y visualizar usuario los cuales presenta una interfaz intuitiva y una representación clara de los datos en tiempo real.
 
-## Development server
+## Documentación del Proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+La documentación del proyecto incluye detalles técnicos y funcionales esenciales para comprender y trabajar con el sistema. Accede a los siguientes recursos:
 
-## Code scaffolding
+- **Arquitectura del sistema**  
+- **Diagramas de flujo**  
+- **Diseños de la interfaz de usuario (UI)**  
+- **Casos de prueba**  
+- **Manual de usuario**  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[Acceso a la documentación completa](https://drive.google.com/drive/folders/1wTFTaACnoVEhMGbIhl3vz2R7mtm_FwcP?usp=sharing)
 
-## Build
+## Enlaces a los Repositorios
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+El sistema está compuesto por varios componentes distribuidos, cada uno con su propio repositorio:
 
-## Running unit tests
+- **[App Engine](https://github.com/Giovanni-Boris/app-angular-engine)**
+- **[Datasource](https://github.com/Giovanni-Boris/datasource-cloud-run)** 
+- **[Microservicio de Usuarios](https://github.com/Giovanni-Boris/user-cloud-run)**
+- **[Microservicio de Productos](https://github.com/Giovanni-Boris/product-cloud-run)** 
+- **[API Gateway](https://github.com/Giovanni-Boris/api-gateway-gcp)**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Aplicación en la Nube
 
-## Running end-to-end tests
+Puedes acceder a la aplicación desplegada en Google Cloud Platform a través del siguiente enlace:  
+[Aplicación en la nube](https://xenon-effect-442521-d4.uc.r.appspot.com/)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Credenciales de acceso válidas
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Usuario:** `usuario`  
+- **Contraseña:** `usuario123`
