@@ -35,3 +35,10 @@ Puedes acceder a la aplicación desplegada en Google Cloud Platform a través de
 
 - **Usuario:** `usuario`  
 - **Contraseña:** `usuario123`
+
+## Equipo 5 de desarrollo
+- Erick Edwin Anco Huaracha
+- Boris Giovanni Ancasi Carlos
+- Diego David Anampa Chura
+- Luis Emanuel Araoz Valencia
+- Jordy Pedro Valencia Jara
